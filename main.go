@@ -25,13 +25,13 @@ func main() {
 	)
 	bchain.AddBlock(records)
 
-	fmt.Printf("Vaidation before tampering: %v\n", bchain.Validate())
+	fmt.Printf("Validation before tampering: %v\n", bchain.Validate())
 
 	//Tampering
 	bchain.LastBlock().PrevBlock.Data.(*criminalrecords.RecordsSet).Records[0].Name = "1"
 	bchain.LastBlock().PrevBlock.DataHash = bchain.LastBlock().Data.Hash()
 
-	fmt.Printf("Vaidation after tampering: %v\n", bchain.Validate())
+	fmt.Printf("Validation after tampering: %v\n", bchain.Validate())
 
 	var json, _ = json.Marshal(bchain.LastBlock())
 	fmt.Printf("Last Block: %v\n", string(json))
